@@ -45,7 +45,7 @@ data class User(
             lastId++
 
             val (firstName,lastName) = Utils.parseFullName(fullname)
-            return User(id= "$lastId", firstName = firstName,lastName = lastName )
+            return User(id= "$lastId", firstName = firstName,lastName = lastName)
         }
     }
 
