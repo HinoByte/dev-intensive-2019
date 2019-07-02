@@ -77,11 +77,19 @@ object Utils {
     fun toInitials(firstName: String?, lastName: String?): String? {
         var init:StringBuilder = java.lang.StringBuilder()
         if((firstName == null || firstName == "" || firstName == " ") && (lastName == null || lastName == "" || lastName == " ")) return null
-        if (firstName != null ) init.append(firstName.substring(0, 1).toUpperCase()) else return null
-        if (lastName != null) init.append(lastName.substring(0,1).toUpperCase())
-            else return init.toString()
+        //if (firstName != null ) init.append(firstName.substring(0, 1).toUpperCase()) else return null
+       // if (lastName != null) init.append(lastName.substring(0,1).toUpperCase())
+        //    else return init.toString()
         //if (firstName.isEmpty() or lastName.isEmpty()) return null
-        return init.toString()
+      //  return init.toString()
+        if((firstName == null || firstName == "" || firstName == " ") && (lastName == null || lastName == "" || lastName == " ")) return null
+
+        var firstInitial = firstName?.getOrNull(0) ?: ""
+        var lastInitial = lastName?.getOrNull(0) ?: ""
+
+        var initials = firstInitial.toString().toUpperCase() + lastInitial.toString().toUpperCase()
+        return initials
+
     }
 
 
