@@ -21,7 +21,7 @@ object Utils {
 
 
 
-    fun transliterations(payload: String, divider:String =" "): String{
+    fun transliteration(payload: String, divider:String =" "): String{
         var translitLetters = mapOf<String, String>("а" to "a",
             "б" to "b",
             "в" to "v",
