@@ -74,11 +74,11 @@ object Utils {
         return firstName.capitalize() + divider + lastName.capitalize()
     }
 
+    fun toInitials(firstName: String?, lastName: String?): String? {
 
 
 
-
-
+    }
 
 
 }
