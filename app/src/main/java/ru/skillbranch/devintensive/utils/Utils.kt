@@ -1,7 +1,5 @@
 package ru.skillbranch.devintensive.utils
 
-import android.service.voice.AlwaysOnHotwordDetector
-
 object Utils {
     fun parseFullName(fullname:String?):Pair<String?,String?>{
         if (fullname != null && !fullname.isEmpty()){
@@ -56,22 +54,29 @@ object Utils {
             "ю" to "yu",
             "я" to "ya"
         )
-        var arrays = payload.split(" ")
-        var firstName = ""
-        var lastName = ""
-
-        arrays.getOrNull(0)?.toCharArray()?.map {
-            if(translitLetters.containsKey(it.toString().toLowerCase())){
-                firstName += translitLetters.getValue(it.toString().toLowerCase())
+//        var arrays = payload.split(divider)
+//        var firstName = ""
+//        var lastName = ""
+//
+//        arrays.getOrNull(0)?.toCharArray()?.map {
+//            if(translitLetters.containsKey(it.toString()))
+//                firstName += translitLetters.getValue(it.toString())
+//
+//        }
+//        arrays.getOrNull(1)?.toCharArray()?.map {
+//            if(translitLetters.containsKey(it.toString()))
+//                lastName += translitLetters.getValue(it.toString())
+//
+//        }
+        var result = ""
+        payload.replace(" ",divider)
+            .forEach {
+                val symbol = translitLetters.getOrDefault(it.toLowerCase().toString(),it.toString())
+                result += if(it.isUpperCase()) symbol.capitalize() else symbol
             }
-        }
-        arrays.getOrNull(1)?.toCharArray()?.map {
-            if(translitLetters.containsKey(it.toString().toLowerCase())){
-                lastName += translitLetters.getValue(it.toString().toLowerCase())
-            }
-        }
+        return  result
 
-        return firstName.capitalize() + divider + lastName.capitalize()
+//        return firstName + divider + lastName
     }
 
     fun toInitials(firstName: String?, lastName: String?): String? {
