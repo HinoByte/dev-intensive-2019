@@ -49,47 +49,31 @@ fun Date.humanizeDiff(date: Date = Date()): String {
         in 26 * Hour..360 * Day -> time = "$prefix${TimeUnits.DAY.plural(abs(Diff / DAY))}$postfix"
         else -> if (Diff<=1) time = "более года назад" else time ="более чем через год"
     }
-    //"$prefix${getTimeUnitValue(timeDiffUnsigned, TimeUnits.MINUTE)}$postfix"
     return time
 }
 
 enum class TimeUnits {
-    SECOND{
-        override fun plural(value : Long) = when (value.asPlulars){
-            Plulars.ONE -> "$value секунду"
-            Plulars.FEW -> "$value секунды"
-            Plulars.MANY-> "$value секунд"}},
+    SECOND {
+        override fun plural(value: Long): String = value.asPlulars(arrayOf("секунду", "секунды", "секунд"))
+    },
     MINUTE {
-        override fun plural(value: Long): String = when (value.asPlulars){
-            Plulars.ONE -> "$value минуту"
-            Plulars.FEW -> "$value минуты"
-            Plulars.MANY-> "$value минут"}},
-    HOUR{
-        override fun plural(value : Long) : String= when (value.asPlulars){
-            Plulars.ONE -> "$value час"
-            Plulars.FEW -> "$value часа"
-            Plulars.MANY-> "$value часов"}},
-    DAY{
-        override fun plural(value : Long) : String= when (value.asPlulars){
-            Plulars.ONE -> "$value день"
-            Plulars.FEW -> "$value дня"
-            Plulars.MANY-> "$value дней"}};
-    abstract fun plural (value : Long) : String
+        override fun plural(value: Long): String = value.asPlulars(arrayOf("минуту", "минуты", "минут"))
+    },
+    HOUR {
+        override fun plural(value: Long): String = value.asPlulars(arrayOf("час", "часа", "часов"))
+    },
+    DAY {
+        override fun plural(value: Long): String = value.asPlulars(arrayOf("день", "дня", "дней"))
+    };
+    abstract fun plural(value: Long): String
 }
 
-enum class Plulars{
-    ONE,
-    FEW,
-    MANY
+fun Long.asPlulars(dimension:Array<String>):String = when {
+        this in 5L..20L -> "$this ${dimension[2]}"
+        this % 10L == 1L-> "$this ${dimension[0]}"
+        this % 10L in 2L..4L -> "$this ${dimension[1]}"
+        else -> "$this ${dimension[2]}"
 }
-
-val Long.asPlulars
-    get() = when{
-        this in 5L..20L -> Plulars.MANY
-        this % 10L == 1L -> Plulars.ONE
-        this % 10L in 2L..4L -> Plulars.FEW
-        else -> Plulars.MANY
-    }
 
 fun String.truncate(value:Int = 16):String {
     val new= this
