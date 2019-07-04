@@ -1,5 +1,7 @@
 package ru.skillbranch.devintensive.utils
 
+import ru.skillbranch.devintensive.models.User
+
 object Utils {
     fun parseFullName(fullname:String?):Pair<String?,String?>{
         if (fullname != null && !fullname.isEmpty()){
@@ -96,7 +98,5 @@ object Utils {
         return initials
 
     }
-
-
 
 }

@@ -76,24 +76,14 @@ fun Long.asPlulars(dimension:Array<String>):String = when {
 }
 
 fun String.truncate(value:Int = 16):String {
-    val new= this
-    if (new.length <  value) return new.trim()
-    return new.substring(0,value).trim()+"..."
+    if (this.length <=  value) return this.trim()
+    if (this[this.substring(0,value).lastIndex].isWhitespace()) return this.replace(this.substring(0,value).last().toString(),"...")
+    return this.substring(0,value).trim()+"..."
 }
 
-//val String.stripHtml
-//    get() = {
-//        var translitLetters = mapOf<String, String>("а" to "a",
-//            "&amp" to "b",
-//            )
-//        val value = this
-//        var rezult = ""
-//        value.forEach {
-//            val symbol = translitLetters.getOrDefault(it.toLowerCase().toString(), it.toString())
-//            rezult += if (it.isUpperCase()) symbol.capitalize() else symbol
-//        }
-//    }
-
+fun String.stripHtml() = this.replace(Regex("<.*?>|&amp;|&lt;|&gt;|&#39;|&quot;"), "").replace(Regex("\\s+"), " ")
+//this.replace(Regex("<[^<]*?>|&#\\d+;"), "").replace(Regex("[^\\S\\r\\n]+"), " ")
+//fun String.stripHtml() = this.replace(Regex("<.*?>|&|'|\"|&amp;|&lt;|&gt;|&#39;|&quot;"), "").replace(Regex("\\s+"), " ")
 
 
 
