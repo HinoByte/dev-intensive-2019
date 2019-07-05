@@ -85,6 +85,7 @@ fun String.truncate(value:Int = 16):String {
 }
 
 fun String.stripHtml() = this.replace(Regex("<.*?>|&amp;|&lt;|&gt;|&#39;|&quot;"), "").replace(Regex("\\s+"), " ")
+//&.*?; все символы с 4 & до ;
 //this.replace(Regex("<[^<]*?>|&#\\d+;"), "").replace(Regex("[^\\S\\r\\n]+"), " ")
 //fun String.stripHtml() = this.replace(Regex("<.*?>|&|'|\"|&amp;|&lt;|&gt;|&#39;|&quot;"), "").replace(Regex("\\s+"), " ")
 
