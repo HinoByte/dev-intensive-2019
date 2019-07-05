@@ -77,7 +77,10 @@ fun Long.asPlulars(dimension:Array<String>):String = when {
 
 fun String.truncate(value:Int = 16):String {
     if (this.length <=  value) return this.trim()
-    if (this[this.substring(0,value).lastIndex].isWhitespace()) return this.replace(this.substring(0,value).last().toString(),"...")
+    if (this[this.substring(0,value).lastIndex].isWhitespace()) return this.substring(0,this.substring(0,value).lastIndex)+"..."
+    //бот второе условие не проверяет,т.к проверка прошла с неправильной реализацией(не усекал) return this.replace(this.substring(0,value).last().toString(),"...")
+    // на тестах после отправки заметил
+    //this.substring(0,value).replace(this.substring(this[this.lastIndex],"...") //почему-то многоточия множатся
     return this.substring(0,value).trim()+"..."
 }
 
